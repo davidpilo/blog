@@ -3,13 +3,13 @@ import { Icon } from 'astro-icon/components';
 
 const LINKEDIN_HREF = 'https://www.linkedin.com/in/david-pilo/';
 const SECTIONS = [
-	{ label: 'Home', href: '/' }
+	{ label: 'Home', href: import.meta.env.BASE_URL }
 ];
 ---
 
 <header>
 	<h2>
-		<a href='/'>David Pilo</a>
+		<a href={import.meta.env.BASE_URL}>David Pilo</a>
 	</h2>
 	<div>
 		<a href={LINKEDIN_HREF} target="_blank">
