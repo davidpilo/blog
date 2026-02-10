@@ -1,5 +1,12 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+import { getCollection } from 'astro:content';
+import '@fontsource-variable/inter';
 
+import Header from '../components/Header.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date - a.data.date);
 ---
 
 <html lang="en">
@@ -9,9 +16,50 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Home | David Pilo</title>
+
+		<ClientRouter />
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Header />
+
+		<main>
+			<PostCard post={posts[0]} />
+			<div class="grid">
+				{posts.slice(1).map((post) => <PostCard post={post} />)}
+			</div>
+		</main>
 	</body>
 </html>
+
+<style>
+body {
+	background-color: #F3F3F3;
+	font-family: 'Inter Variable', sans-serif;
+	padding: 10px 20px;
+}
+
+main {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin: 30px auto 0 auto;
+	max-width: 900px;
+	padding-bottom: 40px;
+}
+
+.grid {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: 1fr 1fr;
+	max-width: 750px;
+	width: 100%;
+}
+
+@media (max-width: 768px) {
+	.grid {
+		grid-template-columns: 1fr;
+	}
+}
+</style>

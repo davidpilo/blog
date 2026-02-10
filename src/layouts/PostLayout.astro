@@ -1,0 +1,86 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/inter';
+
+import Header from '../components/Header.astro';
+import PostTags from '../components/PostTags.astro';
+
+import { formatDate } from '../utils/formatter';
+
+const { post } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{post.data.title} | David Pilo</title>
+
+		<ClientRouter />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<article>
+				<header>
+					<h1 transition:name={`post-title-${post.id}`}>{post.data.title}</h1>
+					<time datetime={post.data.date.toISOString()}>
+						{formatDate(post.data.date)}
+					</time>
+				</header>
+				<div class="content">
+					<slot />
+				</div>
+				<footer>
+					<PostTags tags={post.data.tags} />
+				</footer>
+			</article>
+		</main>
+	</body>
+</html>
+
+<style>
+body {
+	background-color: #F3F3F3;
+	font-family: 'Inter Variable', sans-serif;
+	padding: 10px 20px;
+}
+
+main {
+	margin: 30px auto 0 auto;
+	max-width: 900px;
+	padding-bottom: 40px;
+}
+
+article {
+	max-width: 680px;
+}
+
+article header h1 {
+	font-size: 36px;
+	font-weight: bold;
+	margin: 0;
+}
+
+article header time {
+	color: #6F819A;
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 10px;
+}
+
+.content {
+	color: #575757;
+	margin-top: 30px;
+	line-height: 24px;
+}
+
+footer {
+	margin-top: 30px;
+}
+</style>

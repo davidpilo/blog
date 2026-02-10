@@ -1,0 +1,47 @@
+---
+const { tags } = Astro.props;
+---
+
+<ul>
+	{
+		tags.map((tag) => 
+			<li>
+				<div></div>
+				<span>{tag}</span>
+			</li>
+		)
+	}
+</ul>
+
+<style>
+ul {
+	display: flex;
+	gap: 10px;
+	margin: 0;
+	list-style: none;
+	padding: 0;
+}
+
+li {
+	align-items: center;
+	background-color: #5C82B3;
+	border-radius: 4px;
+	color: #EFEFEF;
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+	gap: 6px;
+	padding: 4px 6px;
+}
+
+li div {
+	background-color: #F3F3F3;
+	border-radius: 50%;
+	height: 5px;
+	width: 5px;
+}
+
+li span::first-letter {
+	text-transform: uppercase;
+}
+</style>

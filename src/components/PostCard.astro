@@ -1,0 +1,62 @@
+---
+import PostTags from './PostTags.astro';
+
+import { formatDate } from '../utils/formatter';
+
+const { post } = Astro.props;
+---
+
+<a href={`/post/${post.slug}`}>
+	<div class="card">
+		<div class="card-header">
+			<h2 transition:name={`post-title-${post.id}`}>
+				{post.data.title}
+			</h2>
+			<div class="post-date">
+				{formatDate(post.data.date)}
+			</div>
+		</div>
+		<p>
+			{post.body.substring(0, 310).trim().replace('\n', ' ') + '...'}
+		</p>
+		<PostTags tags={post.data.tags} />
+	</div>
+</a>
+
+<style>
+h2, p {
+	margin: 0px;
+	padding: 0px;
+}
+	
+a {
+	display: block;
+	max-width: 750px;
+	text-decoration: none;
+}
+
+.card {
+	border: 1px solid #DDDDDD;
+	border-radius: 6px;
+	padding: 20px;
+}
+
+h2 {
+	color: #272727;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.post-date  {
+	color: #6F819A;
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 6px;
+}
+
+p {
+	color: #575757;
+	margin: 16px 0;
+	line-height: 22px;
+}
+</style>

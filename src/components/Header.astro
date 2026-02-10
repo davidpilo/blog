@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const LINKEDIN_HREF = 'https://www.linkedin.com/in/david-pilo/';
+const SECTIONS = [
+	{ label: 'Home', href: '/' }
+];
+---
+
+<header>
+	<h2>
+		<a href='/'>David Pilo</a>
+	</h2>
+	<div>
+		<a href={LINKEDIN_HREF} target="_blank">
+			<Icon id="linkedin-icon" name="linkedin" />
+		</a>
+	</div>
+</header>
+
+<style>
+
+header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between; 
+	margin: 0 auto;
+	max-width: 900px;
+}
+
+h2 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+h2 a {
+	color: #0E5268;
+	text-decoration: none;
+}
+
+#linkedin-icon {
+	color: #1B75BB;
+	font-size: 26px;
+}
+
+</style>
